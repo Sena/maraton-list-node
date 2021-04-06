@@ -8,7 +8,21 @@ exports.search = (req, res) => {
 
     axios.get(url)
         .then(response => {
-            const movies = response.data.d.map((movie) => {
+            const movies = response.data.d.filter(movie => {
+                const type = movie.q;
+
+                if (typeof type === 'undefined') {
+                    return false;
+                }
+
+                if (type !== 'feature') {
+                    console.log(type)
+                    //@todo support new types
+                    return false;
+                }
+                return true;
+
+            }).map(movie => {
                 return {
                     id: movie.id,
                     rank: movie.rank,
@@ -22,13 +36,16 @@ exports.search = (req, res) => {
                         url: movie.i.imageUrl,
                     },
                 };
-            });
+            })
 
             req.search =  {q: response.data.q, movies};
 
             return translate(req, res);
 
         }).catch(error => {
-        return res.status(500).send({error});
+        return res.status(500).send({
+            url,
+            error
+        });
     });
 }
