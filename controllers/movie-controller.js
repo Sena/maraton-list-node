@@ -28,7 +28,7 @@ exports.search = (req, res) => {
                     rank: movie.rank,
                     title: movie.l,
                     year: movie.y,
-                    director: movie.s,
+                    cast: movie.s,
                     type: movie.q,
                     img: {
                         height: movie.i.height,
