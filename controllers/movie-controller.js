@@ -1,4 +1,5 @@
 const axios = require('axios');
+const {translate} = require("./translate-controller");
 
 exports.search = (req, res) => {
     const query = req.query.q.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
@@ -23,7 +24,9 @@ exports.search = (req, res) => {
                 };
             });
 
-            return res.status(200).send({q: response.data.q, movies});
+            req.search =  {q: response.data.q, movies};
+
+            return translate(req, res);
 
         }).catch(error => {
         return res.status(500).send({error});
