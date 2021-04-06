@@ -15,12 +15,12 @@ exports.search = (req, res) => {
                     return false;
                 }
 
-                if (type !== 'feature') {
-                    console.log(type)
-                    //@todo support new types
-                    return false;
-                }
-                return true;
+                return [
+                    'TV mini-series',
+                    'TV series',
+                    'feature',
+                ].includes(type) !== false;
+
 
             }).map(movie => {
                 return {
