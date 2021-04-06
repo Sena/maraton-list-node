@@ -11,7 +11,9 @@ exports.translate = (req, res) => {
 
             const names = htmls.map((html) => {
                 const title = html.data.match(/Brazil<\/td>.*\n.*aka-item__title">(.*)<\/td>/) ||
-                    html.data.match(/\(original title\)<\/td>.*\n.*aka-item__title">(.*)<\/td>/)
+                    html.data.match(/\(original title\)<\/td>.*\n.*aka-item__title">(.*)<\/td>/) ||
+                    html.data.match(/itemprop\=.url.\>(.*)\<\/a>/) ||
+                    ''
 
                 const id = html.data.match(/title\/(.*)\/releaseinfo/);
 
