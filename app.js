@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 
 const routerMovie = require('./routes/movie');
+const routerUser = require('./routes/user');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -26,6 +27,7 @@ app.get('/robots.txt', function (req, res) {
 });
 
 app.use('/movie', routerMovie);
+app.use('/user', routerUser);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
