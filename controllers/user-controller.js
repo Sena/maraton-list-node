@@ -55,6 +55,10 @@ exports.login = async (req, res) => {
 
     const user = await User.findOne({email: req.body.email})
 
+    if (user < 1) {
+        return res.status(401).send({message: 'User not found'})
+    }
+
     bcrypt.compare(req.body.password, user.password, (bError, bResult) => {
         if (bError) {
             return res.status(401).send({message: 'Auth failed'})
