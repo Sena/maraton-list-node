@@ -5,7 +5,8 @@ const Schema = mongoose.Schema
 
 exports.UserSchema = new Schema({
     name: {
-        type: String
+        type: String,
+        required: 'Name is required'
     },
     email: {
         type: String,
