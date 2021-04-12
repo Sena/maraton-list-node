@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const mongoose = require('../config/mongoose')
+const mongoose = require('../config/mongoose')(process.env.MDB_HOST_USER)
 const jsonwebtoken = require("jsonwebtoken")
 const {UserSchema} = require('../model/user-model')
 
